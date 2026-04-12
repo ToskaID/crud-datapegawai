@@ -12,7 +12,7 @@ $sql = "SELECT p.*, d.nama_departemen, j.nama_jabatan
 $query = mysqli_query($connection, $sql);
 $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
 ?>
-;
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,7 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
 </head>
 <body>
     <h1>List Data Pegawai</h1>
+    <a href="form-insert.php">Tambah Data</a>
     <table border="1">
         <thead>
             <tr>
@@ -41,7 +42,11 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td><?=$p["nama_departemen"] ?></td>
                 <td><?=$p["nama_jabatan"] ?></td>
                 <td><?=$p["jenis_kelamin"] ?></td>   
-               
+                <td>
+                    <a href="detail.php?id=<?=$p["id"]?>">Detail</a>  |
+                    <a href="form-edit.php?id=<?=$p["id"]?>">Edit</a> | 
+                    <a href="delete.php?id=<?=$p["id"]?>">Delete</a>
+                </td>  
             </tr>
         <?php endforeach; ?>
 

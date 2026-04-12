@@ -52,7 +52,7 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td>
                     <a href="detail.php?id=<?=$p["id"]?>">Detail</a>  |
                     <a href="edit-pegawai.php?id=<?=$p["id"]?>">Edit</a> | 
-                    <a href="delete.php?id=<?=$p["id"]?>">Delete</a>
+                    <a href="delete-pegawai.php?id=<?=$p["id"]?>">Delete</a>
                 </td>  
             </tr>
         <?php endforeach; ?>

@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
         VALUES 
         ('$nama','$jenis_kelamin','$alamat','$tempat_lahir','$tanggal_lahir','$no_hp','$status_pernikahan','$departemen_id','$jabatan_id')
     ");
-    header("Location: index.php");
+    header("Location: list-pegawai.php");
     }catch(Exception $e){
         echo "Gagal Inset ke database " . $e->getMessage();
     }

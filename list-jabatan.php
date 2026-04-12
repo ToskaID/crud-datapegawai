@@ -36,7 +36,7 @@ $jabatan = mysqli_fetch_all($query,MYSQLI_ASSOC);
                 <td><?=$j["nama_jabatan"] ?></td>
                 <td>
                     <a href="edit-jabatan.php?id=<?=$j["id"]?>">Edit</a> | 
-                    <a href="delete.php?id=<?=$j["id"]?>">Delete</a>
+                    <a href="delete-jabatan.php?id=<?=$j["id"]?>">Delete</a>
                 </td>
                 
             </tr>

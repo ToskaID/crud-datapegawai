@@ -36,7 +36,7 @@ $departemen = mysqli_fetch_all($query,MYSQLI_ASSOC);
                 <td><?=$d["nama_departemen"] ?></td>
                 <td>
                     <a href="edit-departemen.php?id=<?=$d["id"]?>">Edit</a> | 
-                    <a href="delete.php?id=<?=$d["id"]?>">Delete</a>
+                    <a href="delete-departemen.php?id=<?=$d["id"]?>">Delete</a>
                 </td>
               
             </tr>

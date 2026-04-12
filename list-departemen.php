@@ -15,18 +15,30 @@ $departemen = mysqli_fetch_all($query,MYSQLI_ASSOC);
     <title>Document</title>
 </head>
 <body>
-    <h1>List Data Departemen</h1>
+    <a href="index.php">Home</a> | 
+    <a href="list-pegawai.php">Pegawai</a> | 
+    <a href="list-departemen.php">Departemen</a> | 
+    <a href="list-jabatan.php">Jabatan</a>
+
+    <h2>List Data Departemen</h2>
+    <a href="departemen.php">Tambah Data</a><br><br>
     <table border="1">
         <thead>
             <tr>
                 <th>No</th>
                 <th>Nama Departemen</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <?php foreach($departemen as $index => $d) : ?>
             <tr>
                 <td><?=$index+1 ?></td>
                 <td><?=$d["nama_departemen"] ?></td>
+                <td>
+                    <a href="edit-departemen.php?id=<?=$d["id"]?>">Edit</a> | 
+                    <a href="delete.php?id=<?=$d["id"]?>">Delete</a>
+                </td>
+              
             </tr>
         <?php endforeach ?>
 

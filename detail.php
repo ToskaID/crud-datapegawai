@@ -46,15 +46,15 @@ $data_pegawai = mysqli_fetch_assoc($query);
             <td> : <?=$data_pegawai["no_handphone"] ?></td>
         </tr>
          <tr>
-            <td>Alamat</td>
+            <td>Tempat Lahir</td>
             <td> : <?=$data_pegawai["tempat_lahir"] ?></td>
         </tr>
          <tr>
-            <td>Jenis Kelamin</td>
+            <td>Tanggal Lahir</td>
             <td> : <?=$data_pegawai["tanggal_lahir"] ?></td>
         </tr>
          <tr>
-            <td>Jenis Kelamin</td>
+            <td>Alamat</td>
             <td> : <?=$data_pegawai["alamat"] ?></td>
         </tr>
          <tr>

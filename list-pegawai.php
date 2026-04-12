@@ -22,8 +22,15 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <title>Document</title>
 </head>
 <body>
-    <h1>List Data Pegawai</h1>
-    <a href="form-insert.php">Tambah Data</a>
+
+    <a href="index.php">Home</a> | 
+    <a href="list-pegawai.php">Pegawai</a> | 
+    <a href="list-departemen.php">Departemen</a> | 
+    <a href="list-jabatan.php">Jabatan</a>
+
+    <h2>List Data Pegawai</h2>
+    <a href="pegawai.php">Tambah Data</a>
+    <br><br>
     <table border="1">
         <thead>
             <tr>
@@ -44,7 +51,7 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td><?=$p["jenis_kelamin"] ?></td>   
                 <td>
                     <a href="detail.php?id=<?=$p["id"]?>">Detail</a>  |
-                    <a href="form-edit.php?id=<?=$p["id"]?>">Edit</a> | 
+                    <a href="edit-pegawai.php?id=<?=$p["id"]?>">Edit</a> | 
                     <a href="delete.php?id=<?=$p["id"]?>">Delete</a>
                 </td>  
             </tr>

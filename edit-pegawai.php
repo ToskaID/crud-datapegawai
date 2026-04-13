@@ -5,9 +5,10 @@ require 'connection.php';
 $id = $_GET["id"];
 // Kita gabungkan (JOIN) tabel pegawai,departemen,jabatan di sini
 // Pastikan nama kolom 'departemen_id' di tabel pegawai dan 'id' di tabel departemen sudah benar
-$sql = "SELECT p.*, d.nama_departemen, j.nama_jabatan
+$sql = "SELECT p.*, d.nama_departemen, j.nama_jabatan, u.username,u.id as user_id
         FROM pegawai AS p
         LEFT JOIN departemen AS d ON p.departemen_id = d.id
+        LEFT JOIN users AS u ON p.user_id = u.id
         LEFT JOIN jabatan AS j ON p.jabatan_id = j.id WHERE p.id = '$id'";
 
 // 1. Ambil data spesifik pegawai yang mau diedit
@@ -23,6 +24,7 @@ $query_jabatan = mysqli_query($connection, "SELECT * FROM jabatan");
 
 if (isset($_POST['submit'])) {
     $nama = $_POST['nama'];
+    $username = $_POST['username'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
     $alamat = $_POST['alamat'];
     $tempat_lahir = $_POST['tempat_lahir'];
@@ -31,8 +33,13 @@ if (isset($_POST['submit'])) {
     $status_pernikahan = $_POST['status_pernikahan'];
     $departemen_id = $_POST['departemen_id'];
     $jabatan_id = $_POST['jabatan_id'];
+    $user_id = $data_pegawai['user_id'];
 
     try{
+        //update tabel usr (untuk username)
+        mysqli_query($connection, "UPDATE users SET username = '$username' WHERE id = '$user_id'");
+
+        //update tabel pegawai
         mysqli_query(
             $connection, "UPDATE pegawai SET
             nama ='$nama',
@@ -70,6 +77,9 @@ if (isset($_POST['submit'])) {
         <label>Nama Pegawai</label><br>
         <input type="text" name="nama" value="<?=$data_pegawai["nama"]?>"  />
         <br><br>
+
+        <label>Username</label><br>
+        <input type="text" name="username" value="<?= $data_pegawai['username'] ?>" required /><br><br>
 
         <label>Nama Departemen</label><br>
         <select name="departemen_id">

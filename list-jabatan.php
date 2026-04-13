@@ -24,6 +24,7 @@ $jabatan = mysqli_fetch_all($query,MYSQLI_ASSOC);
 <body>
     <nav>
         <a href="index.php">Home</a> | 
+        <a href="profile.php">Profile</a> | 
         <a href="list-pegawai.php">Pegawai</a> | 
         <?php if ($_SESSION['level'] == 'admin') : ?>
         <a href="list-departemen.php">Departemen</a> | 

@@ -17,6 +17,7 @@ if (isset($_POST['login'])) {
             $_SESSION['login'] = true;
             $_SESSION['username'] = $row['username'];
             $_SESSION['level'] = $row['level']; // Simpan level (admin/user)
+            $_SESSION['id'] = $row['id']; // Simpan UUID user di sini
 
             // Redirect berdasarkan level
             if ($row['level'] == 'admin') {

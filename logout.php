@@ -20,7 +20,7 @@ if (ini_get("session.use_cookies")) {
 // 4. Redirect ke halaman login
 echo "<script>
         alert('Anda telah berhasil logout.');
-        window.location='login.php';
+        window.location='login-new.php';
       </script>";
 exit;
 ?>

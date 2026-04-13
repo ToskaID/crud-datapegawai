@@ -1,5 +1,13 @@
 <?php
 
+// 1. WAJIB di baris paling atas, sebelum kode apapun
+session_start();
+
+// 2. Proteksi: Jika belum login, tendang ke halaman login
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
 require 'connection.php';
 
 // Kita gabungkan (JOIN) tabel pegawai,departemen,jabatan di sini
@@ -22,14 +30,22 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <title>Document</title>
 </head>
 <body>
+    <nav>
+        <a href="index.php">Home</a> | 
+        <a href="list-pegawai.php">Pegawai</a> | 
+          <?php if ($_SESSION['level'] == 'admin') : ?>
+        <a href="list-departemen.php">Departemen</a> | 
+        <a href="list-jabatan.php">Jabatan</a> |
+         <?php endif; ?>
+        <a href="logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Logout (<?= $_SESSION['username']; ?>)</a>
+    </nav>
 
-    <a href="index.php">Home</a> | 
-    <a href="list-pegawai.php">Pegawai</a> | 
-    <a href="list-departemen.php">Departemen</a> | 
-    <a href="list-jabatan.php">Jabatan</a>
+   
 
     <h2>List Data Pegawai</h2>
+     <?php if ($_SESSION['level'] == 'admin') : ?>
     <a href="pegawai.php">Tambah Data</a>
+     <?php endif; ?>
     <br><br>
     <table border="1">
         <thead>
@@ -39,7 +55,9 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <th>Departemen</th>
                 <th>Jabatan</th>
                 <th>Jenis Kelamin</th>
+                <?php if ($_SESSION['level'] == 'admin') : ?>
                 <th>Aksi</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <?php foreach($data_pegawai as $index => $p) : ?>
@@ -48,12 +66,14 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <td><?=$p["nama"] ?></td>
                 <td><?=$p["nama_departemen"] ?></td>
                 <td><?=$p["nama_jabatan"] ?></td>
-                <td><?=$p["jenis_kelamin"] ?></td>   
+                <td><?=$p["jenis_kelamin"] ?></td> 
+                <?php if ($_SESSION['level'] == 'admin') : ?>  
                 <td>
                     <a href="detail.php?id=<?=$p["id"]?>">Detail</a>  |
-                    <a href="edit-pegawai.php?id=<?=$p["id"]?>">Edit</a> | 
-                    <a href="delete-pegawai.php?id=<?=$p["id"]?>">Delete</a>
+                    <a href="edit-pegawai.php?id=<?= $d['id']; ?>">Edit</a> | 
+                    <a href="delete-pegawai.php?id=<?= $d['id']; ?>" onclick="return confirm('Yakin?')">Delete</a>
                 </td>  
+                <?php endif; ?>
             </tr>
         <?php endforeach; ?>
 

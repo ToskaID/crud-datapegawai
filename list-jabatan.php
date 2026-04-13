@@ -2,6 +2,13 @@
 
 require 'connection.php';
 
+
+// // 2. Proteksi: Jika belum login, tendang ke halaman login
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+
 $query = mysqli_query($connection, "SELECT * FROM jabatan");
 $jabatan = mysqli_fetch_all($query,MYSQLI_ASSOC);
 
@@ -15,10 +22,15 @@ $jabatan = mysqli_fetch_all($query,MYSQLI_ASSOC);
     <title>Document</title>
 </head>
 <body>
-    <a href="index.php">Home</a> | 
-    <a href="list-pegawai.php">Pegawai</a> | 
-    <a href="list-departemen.php">Departemen</a> | 
-    <a href="list-jabatan.php">Jabatan</a>
+    <nav>
+        <a href="index.php">Home</a> | 
+        <a href="list-pegawai.php">Pegawai</a> | 
+        <?php if ($_SESSION['level'] == 'admin') : ?>
+        <a href="list-departemen.php">Departemen</a> | 
+        <a href="list-jabatan.php">Jabatan</a> |
+         <?php endif; ?>
+        <a href="logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Logout (<?= $_SESSION['username']; ?>)</a>
+    </nav>
 
     <h2>List Data Jabatan</h2>
     <a href="jabatan.php">Tambah Data</a><br><br>

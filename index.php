@@ -1,9 +1,8 @@
 <?php
 require 'connection.php';
-session_start();
 
 // Jika belum login ATAU bukan admin, tendang ke login
-if (!isset($_SESSION['login']) || $_SESSION['level'] !== 'admin') {
+if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }

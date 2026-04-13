@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
         mysqli_query(
             $connection, "INSERT INTO departemen(nama_departemen) VALUES ('$nama_departemen')"
          );
-         header("Location: list-departemen.php");
+          echo "<script>alert('Data Berhasil Disimpan!'); window.location='list-departemen.php';</script>";
     }catch(Exception $e){
         echo "Gagal Inset ke database " . $e->getMessage();
     }

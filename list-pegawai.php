@@ -1,14 +1,12 @@
 <?php
 
-// 1. WAJIB di baris paling atas, sebelum kode apapun
-session_start();
+require 'connection.php';
 
-// 2. Proteksi: Jika belum login, tendang ke halaman login
+// // 2. Proteksi: Jika belum login, tendang ke halaman login
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
 }
-require 'connection.php';
 
 // Kita gabungkan (JOIN) tabel pegawai,departemen,jabatan di sini
 // Pastikan nama kolom 'departemen_id' di tabel pegawai dan 'id' di tabel departemen sudah benar
@@ -33,7 +31,7 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
     <nav>
         <a href="index.php">Home</a> | 
         <a href="list-pegawai.php">Pegawai</a> | 
-          <?php if ($_SESSION['level'] == 'admin') : ?>
+        <?php if ($_SESSION['level'] == 'admin') : ?>
         <a href="list-departemen.php">Departemen</a> | 
         <a href="list-jabatan.php">Jabatan</a> |
          <?php endif; ?>
@@ -44,7 +42,7 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
     <h2>List Data Pegawai</h2>
      <?php if ($_SESSION['level'] == 'admin') : ?>
-    <a href="pegawai.php">Tambah Data</a>
+    <a href="regis-pegawai.php">Tambah Data</a>
      <?php endif; ?>
     <br><br>
     <table border="1">
@@ -70,8 +68,8 @@ $data_pegawai = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <?php if ($_SESSION['level'] == 'admin') : ?>  
                 <td>
                     <a href="detail.php?id=<?=$p["id"]?>">Detail</a>  |
-                    <a href="edit-pegawai.php?id=<?= $d['id']; ?>">Edit</a> | 
-                    <a href="delete-pegawai.php?id=<?= $d['id']; ?>" onclick="return confirm('Yakin?')">Delete</a>
+                    <a href="edit-pegawai.php?id=<?= $p['id']; ?>">Edit</a> | 
+                    <a href="delete-pegawai.php?id=<?= $p['id']; ?>" onclick="return confirm('Yakin?')">Delete</a>
                 </td>  
                 <?php endif; ?>
             </tr>

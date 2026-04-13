@@ -1,6 +1,12 @@
 <?php
 require 'connection.php';
 
+//Proteksi: Jika belum login dan bukan admin di tendang ke halaman login
+if (!isset($_SESSION['login']) || $_SESSION['level'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
+
 $id = $_GET["id"];
 // Kita gabungkan (JOIN) tabel pegawai,departemen,jabatan di sini
 // Pastikan nama kolom 'departemen_id' di tabel pegawai dan 'id' di tabel departemen sudah benar
@@ -15,7 +21,8 @@ if (isset($_POST['submit'])) {
         mysqli_query(
             $connection, "UPDATE  departemen SET nama_departemen ='$nama_departemen' WHERE id= '$id'"
          );
-         header("Location: list-departemen.php");
+          echo "<script>alert('Data Berhasil Diedit!'); window.location='list-departemen.php';</script>";
+    }catch(Exception $e){
     }catch(Exception $e){
         echo "Gagal Inset ke database " . $e->getMessage();
     }

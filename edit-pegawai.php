@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
             jabatan_id ='$jabatan_id'
              WHERE id= '$id'"
          );
-         header("Location: list-pegawai.php");
+         echo "<script>alert('Data Berhasil Diedit!'); window.location='list-pegawai.php';</script>";
     }catch(Exception $e){
         echo "Gagal Inset ke database " . $e->getMessage();
     }
